@@ -18,30 +18,6 @@ The project examines how a common neural network architecture performs when appl
 
 The original project was developed in February 2025.
 
-## Research Objectives
-
-1. Develop an RNN architecture capable of learning sequential patterns in historical stock prices.
-2. Evaluate prediction performance using Root Mean Squared Error (RMSE) and Mean Absolute Error (MAE).
-3. Compare forecasting results for two companies in the aerospace and defense sector and one in the energy sector.
-4. Investigate potential limitations of recurrent neural networks when applied to financial time-series forecasting.
-
-## Dataset and Preprocessing
-
-Historical daily stock-price data was used for each company.
-
-The source datasets contain the following attributes:
-
-| Feature | Description             |
-| ------- | ----------------------- |
-| Date    | Trading date            |
-| Open    | Opening stock price     |
-| High    | Highest trading price   |
-| Low     | Lowest trading price    |
-| Close   | Closing stock price     |
-| Volume  | Number of shares traded |
-
-The implemented model uses **closing prices as its sole input feature and prediction target**.
-
 ## Model Architecture
 
 A stacked Simple Recurrent Neural Network was implemented using TensorFlow and Keras.
@@ -100,23 +76,6 @@ The prediction plot shows the model following the general upward direction of th
 
 This suggests that the model captured some directional movement within the displayed evaluation period, but the available evidence is insufficient to establish whether this behavior generalizes to other periods or market conditions.
 
-## Limitations
-
-Several methodological limitations should be considered when interpreting the results.
-
-**Limited historical observations:** The project uses a relatively small financial time series. Such datasets provide limited information for training neural networks and assessing their performance across different market conditions.
-
-**Single-feature forecasting:** Only closing prices are used as model inputs. Trading volume, market conditions, and macroeconomic indicators are not incorporated into the implemented model.
-
-**Data leakage:** The MinMaxScaler is fitted to the full dataset before the chronological split. Consequently, information about the evaluation-period price range influences preprocessing.
-
-**Evaluation design:** The held-out evaluation data is also used to monitor validation loss during training. An independent test set would provide a more rigorous estimate of generalization performance.
-
-**Forecast alignment:** The final prediction routine uses the last test sequence. It does not explicitly construct the input required to forecast the trading day after the final available observation.
-
-**Limited reproducibility:** The project does not establish fixed random seeds or document repeated training runs. The reported metrics therefore describe individual model executions rather than the distribution of performance across runs.
-
-These limitations constrain the conclusions that can be drawn from the reported results.
 
 ## Technologies Used
 
