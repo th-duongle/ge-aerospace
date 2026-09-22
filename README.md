@@ -42,20 +42,6 @@ The source datasets contain the following attributes:
 
 The implemented model uses **closing prices as its sole input feature and prediction target**.
 
-### Data preparation
-
-The preprocessing pipeline consists of:
-
-1. Converting the Date column into a datetime index.
-2. Normalizing closing prices using Scikit-learn's MinMaxScaler.
-3. Transforming the normalized data into overlapping sequences of 25 observations.
-4. Splitting the sequences chronologically into 80% training data and 20% evaluation data.
-5. Converting model predictions back into their original dollar-denominated scale for interpretation.
-
-Each input sequence contains 25 consecutive closing-price observations, and its corresponding target is the closing price immediately following that sequence.
-
-Separate instances of the same neural network architecture were trained for each company.
-
 ## Model Architecture
 
 A stacked Simple Recurrent Neural Network was implemented using TensorFlow and Keras.
@@ -81,38 +67,6 @@ The architecture consists of:
 The recurrent layers process sequential information, while dropout regularization is intended to reduce overfitting.
 
 The final dense layer produces a single continuous value representing the predicted closing price.
-
-## Results
-
-### Closing-Price Predictions
-
-The original report presents the following forecasts for March 13, 2025. The actual closing prices were subsequently supplied for comparison.
-
-| Company         | Predicted Close | Actual Close | Absolute Error | Percentage Error |
-| --------------- | --------------: | -----------: | -------------: | ---------------: |
-| GE Aerospace    |         $190.96 |      $192.49 |          $1.53 |            0.79% |
-| Lockheed Martin |         $455.21 |      $467.87 |         $12.66 |            2.71% |
-| ExxonMobil      |         $107.01 |      $108.65 |          $1.64 |            1.51% |
-
-*Percentage error is calculated as the absolute difference between predicted and actual prices divided by the actual closing price.*
-
-The comparison provides an illustrative assessment of the three reported forecasts. The notebook's final prediction routine uses the last test input sequence rather than explicitly constructing a new sequence after the final observation. Accordingly, the forecast dates and alignment with the supplied actual prices should be independently verified before these figures are treated as a confirmed out-of-sample forecasting evaluation.
-
-### Model Evaluation Metrics
-
-The original notebook reports the following evaluation metrics:
-
-| Company         |   RMSE |    MAE |
-| --------------- | -----: | -----: |
-| GE Aerospace    |  $3.41 |  $3.41 |
-| Lockheed Martin | $34.30 | $24.93 |
-| ExxonMobil      |  $3.21 |  $3.21 |
-
-RMSE penalizes larger prediction errors more heavily, while MAE represents the average absolute difference between predicted and observed prices.
-
-These metrics describe performance on the notebook's evaluation sequences and are distinct from the individual closing-price errors presented above.
-
-Because the companies have different stock-price levels, their dollar-denominated errors should not be interpreted as a fully normalized comparison of forecasting performance.
 
 ## Key Findings
 
@@ -163,20 +117,6 @@ Several methodological limitations should be considered when interpreting the re
 **Limited reproducibility:** The project does not establish fixed random seeds or document repeated training runs. The reported metrics therefore describe individual model executions rather than the distribution of performance across runs.
 
 These limitations constrain the conclusions that can be drawn from the reported results.
-
-## Future Improvements
-
-The following improvements could be explored in subsequent iterations:
-
-* Incorporate trading volume and additional market indicators as predictive features.
-* Compare SimpleRNN performance against LSTM and GRU architectures.
-* Implement a training-only normalization procedure to eliminate preprocessing leakage.
-* Introduce independent validation and test periods using walk-forward evaluation.
-* Compare neural network forecasts with simple benchmarks, such as predicting that the next closing price will equal the previous closing price.
-* Evaluate forecasting performance across multiple historical periods and market conditions.
-* Incorporate macroeconomic indicators and investigate whether they improve out-of-sample forecasting performance.
-
-These are proposed extensions and were not implemented in the original project.
 
 ## Technologies Used
 
