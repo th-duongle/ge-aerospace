@@ -40,41 +40,21 @@ The architecture consists of:
 * Batch size: 64
 * Input sequence length: 25 trading observations
 
-The recurrent layers process sequential information, while dropout regularization is intended to reduce overfitting.
-
-The final dense layer produces a single continuous value representing the predicted closing price.
+The recurrent layers process sequential information, while dropout regularization is intended to reduce overfitting. The final dense layer produces a single continuous value representing the predicted closing price.
 
 ## Key Findings
 
 ### 1. GE Aerospace
 
-The model's reported closing-price forecast was $190.96, compared with a supplied actual price of $192.49.
-
-The evaluation produced an RMSE and MAE of $3.41.
-
-The training and validation loss curves exhibit fluctuations, suggesting that the model's learning behavior was not entirely stable. The plotted predictions also deviate from the observed price trajectory.
-
-These observations illustrate the difficulty of producing consistent forecasts from a limited financial time series.
+The model's reported closing-price forecast was $190.96, compared with a supplied actual price of $192.49. The evaluation produced an RMSE and MAE of $3.41. The training and validation loss curves exhibit fluctuations, suggesting that the model's learning behavior was not entirely stable. The plotted predictions also deviate from the observed price trajectory. These observations illustrate the difficulty of producing consistent forecasts from a limited financial time series.
 
 ### 2. Lockheed Martin
 
-Lockheed Martin exhibited the largest reported dollar-denominated evaluation errors, with an RMSE of $34.30 and an MAE of $24.93.
-
-Its reported closing-price prediction was $455.21, compared with a supplied actual price of $467.87.
-
-The original prediction plot shows a relatively flat-to-declining forecast while the observed prices increase.
-
-This discrepancy suggests that the fitted model did not adequately capture the upward movement in the displayed evaluation period.
+Lockheed Martin exhibited the largest reported dollar-denominated evaluation errors, with an RMSE of $34.30 and an MAE of $24.93. Its reported closing-price prediction was $455.21, compared with a supplied actual price of $467.87. The original prediction plot shows a relatively flat-to-declining forecast while the observed prices increase. This discrepancy suggests that the fitted model did not adequately capture the upward movement in the displayed evaluation period.
 
 ### 3. ExxonMobil
 
-ExxonMobil produced an RMSE and MAE of $3.21.
-
-Its reported closing-price prediction was $107.01, compared with a supplied actual price of $108.65.
-
-The prediction plot shows the model following the general upward direction of the observed prices, although the predicted values remain below the actual values.
-
-This suggests that the model captured some directional movement within the displayed evaluation period, but the available evidence is insufficient to establish whether this behavior generalizes to other periods or market conditions.
+ExxonMobil produced an RMSE and MAE of $3.21. Its reported closing-price prediction was $107.01, compared with a supplied actual price of $108.65. The prediction plot shows the model following the general upward direction of the observed prices, although the predicted values remain below the actual values. This suggests that the model captured some directional movement within the displayed evaluation period, but the available evidence is insufficient to establish whether this behavior generalizes to other periods or market conditions.
 
 
 ## Technologies Used
